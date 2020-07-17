@@ -11,10 +11,10 @@ public with sharing class PhotosController {
     }
 
     @AuraEnabled
-    public static void sendEmail(List<Photo__c> photos){
+    public static void sendEmail(List<Photo__c> photos, String email){
         PhotosEmailService emailService = new PhotosEmailService();
 
         emailService.setPhotosToSend(photos);
-        emailService.sendPhotos();
+        emailService.sendPhotos(email);
     }
 }

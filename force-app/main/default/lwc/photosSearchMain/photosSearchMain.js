@@ -1,4 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 import getPhotos from '@salesforce/apex/PhotosController.getPhotos'
 import sendEmail from '@salesforce/apex/PhotosController.sendEmail'
 
@@ -7,7 +8,11 @@ const DELAY = 500;
 export default class PhotosSearchMain extends LightningElement {
 
     @track
+    isButtonDisabled = false
+    @track
     searchKey = '';
+    @track
+    emailFieldValue = '';
     @wire(getPhotos, {title: '$searchKey'})
     photos = []
     @track columns = [
@@ -27,6 +32,19 @@ export default class PhotosSearchMain extends LightningElement {
     }
 
     handleSendEmailButton(event){
-        sendEmail({photos: this.photos.data})
+        this.isButtonDisabled = true
+        sendEmail({photos: this.photos.data, email: this.emailFieldValue})
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Success',
+                message: 'Email was sent',
+                variant: 'success'
+            })
+        )
+
+    }
+
+    onEmailInputChange(event){
+        this.emailFieldValue = event.target.value;
     }
 }

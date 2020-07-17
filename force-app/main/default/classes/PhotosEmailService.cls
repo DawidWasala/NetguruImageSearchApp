@@ -2,10 +2,9 @@ public with sharing class PhotosEmailService {
 
     private List<Photo__c> photosToSend;
 
-    public void sendPhotos(){
+    public void sendPhotos(String email){
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        List<String> toAddresses = new List<String>{'dawid.wasala1@gmail.com'};
-        mail.setToAddresses(toAddresses);
+        mail.setToAddresses(new String[]{email});
         mail.setHtmlBody(buildHtmlBody(photosToSend));
 
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] {mail});

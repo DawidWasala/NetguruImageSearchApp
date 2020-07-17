@@ -24,11 +24,23 @@
 
                 </c-image-datatable>
             </div>
+
+            <lightning-input 
+                class="slds-p-around_medium"    
+                type='text'
+                name='emailInput'
+                label='Email'
+                placeholder='Enter e-mail..'
+                onchange='{onEmailInputChange}'
+                value='{emailFieldValue}'>
+            </lightning-input>
+
             <lightning-button
                 class="slds-p-around_medium"
                 variant="brand"
-                label="Send email"
-                onclick={handleSendEmailButton}>
+                label="Send filtered records as an email"
+                onclick={handleSendEmailButton}
+                disabled={isButtonDisabled}>
 
             </lightning-button>
         </div> 
