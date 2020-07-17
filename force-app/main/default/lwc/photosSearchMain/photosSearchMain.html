@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Photos" icon-name="custom:custom14">
+        <div class="slds-m-around_medium lgc-bg">
+
+            <lightning-input 
+                class="slds-p-around_medium"    
+                type='text'
+                name='searchinput'
+                label='Search'
+                placeholder='Enter title..'
+                onchange='{onSearchInputChange}'
+                value='{searchFieldValue}'>
+                
+            </lightning-input>
+            <div class="slds-p-around_large"> 
+                <c-image-datatable
+                    key-field="Id"
+                    data={photos.data}
+                    columns={columns}
+                    show-row-number-column="false"
+                    hide-checkbox-column="true"
+                    wrap-text-max-lines='3'
+                    columns-widths-mode="auto">
+
+                </c-image-datatable>
+            </div>
+            <lightning-button
+                class="slds-p-around_medium"
+                variant="brand"
+                label="Send email"
+                onclick={handleSendEmailButton}>
+
+            </lightning-button>
+        </div> 
+    </lightning-card>
+</template>
