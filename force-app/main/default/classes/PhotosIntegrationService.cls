@@ -13,6 +13,7 @@ public with sharing class PhotosIntegrationService {
         savePhotos(photos);
     }
 
+    @testVisible
     private void savePhotos(List<Photo> photos){
 
         List<Photo__c> photosToInsert = new List<Photo__c>();
